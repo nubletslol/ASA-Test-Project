@@ -1,4 +1,27 @@
-= [];
+function sheetData() {
+  var now = Date(); //pulls current date
+  Logger.log(formatcurrentdate(now));
+  
+  
+  var y = 3; //date checker to be able to see compare the date with the current date
+  while (formatcurrentdate(datadate) != formatcurrentdate(now))
+  {
+    var datadate = SpreadsheetApp.getActiveSheet().getRange(2,y).getValues();
+    y++;
+  }
+  
+  const nongiven = [];//checks the first table to see if the items are true or false
+  for (let x = 0; x<10;x++){
+    var checker = SpreadsheetApp.getActiveSheet().getRange(x+3, y-1).getDisplayValue();
+  //checks the display value to be able to se if the item is true or false
+    if (checker == "FALSE"){
+      let officenumber = nongiven.push('Office '+(x+1) + " ")
+    //pushes the office number into array if it is false
+    }
+    
+  } // arrays for the tickets left as well as the office number corrosponding to the ticket value
+     const ticketoffice = [];
+   const missingticket = [];
   for (let x = 17; x<27;x++){//starts off on the 17th row to be able to pull the data correctly
     var checker1 = SpreadsheetApp.getActiveSheet().getRange(x, y-1).getDisplayValue();
     if (checker1 != 0){//checks to see a non 0 value

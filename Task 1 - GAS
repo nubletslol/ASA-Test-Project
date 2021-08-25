@@ -42,7 +42,7 @@ function sheetData() {
 }
 //email function to be able to output the email
 function emailSent(now,nongiven,combination){ 
- var emailAddress = 'khoa.lam.ngo@gmail.com' 
+ var emailAddress = 'join-us@insidedesk.com' 
  var subject = "Daily Report of " + formatcurrentdate(now) //gets current date for the daily report
  var message = "Daily data not received from the following: \n" + nongiven +"\nAnd the following Tickets requires attention: \n" + combination
  MailApp.sendEmail(emailAddress,subject,message)

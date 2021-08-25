@@ -1,0 +1,44 @@
+= [];
+  for (let x = 17; x<27;x++){//starts off on the 17th row to be able to pull the data correctly
+    var checker1 = SpreadsheetApp.getActiveSheet().getRange(x, y-1).getDisplayValue();
+    if (checker1 != 0){//checks to see a non 0 value
+      let officenumber = ticketoffice.push('Office '+ (x-16) + " ") //adds the numbers into the arrays
+      let ticketsleft = missingticket.push(checker1)
+      
+    }
+    
+  }
+  const combination = [];//combines the arrays as well as edits it so it can be pulled into the emailing system
+  for (var i = 0; i<ticketoffice.length && i<missingticket.length; i++){
+     combination[i] = ["["+ticketoffice[i]," "+ missingticket[i]+" Tickets]"]
+   }
+  Logger.log(combination)
+  
+//calls emailer function
+  emailSent(now,nongiven,combination)
+}
+//email function to be able to output the email
+function emailSent(now,nongiven,combination){ 
+ var emailAddress = 'khoa.lam.ngo@gmail.com' 
+ var subject = "Daily Report of " + formatcurrentdate(now) //gets current date for the daily report
+ var message = "Daily data not received from the following: \n" + nongiven +"\nAnd the following Tickets requires attention: \n" + combination
+ MailApp.sendEmail(emailAddress,subject,message)
+
+}
+
+
+//to format the date so that it can check to see if its on the right coloumn
+function formatcurrentdate(date){
+  var date = new Date(date);
+  month = '' + (date.getMonth() +1);
+  day = '' + date.getDate();
+  year = date.getFullYear();
+  
+  if(month.length<2)
+    month = '0' + month;
+  if (day.length<2)
+    day = '0'+day;
+
+  return [year,month,day].join('-')
+
+}

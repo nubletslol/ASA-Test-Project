@@ -42,9 +42,12 @@ function sheetData() {
 }
 //email function to be able to output the email
 function emailSent(now,nongiven,combination){ 
- var emailAddress = 'join-us@insidedesk.com' 
- var subject = "Daily Report of " + formatcurrentdate(now) //gets current date for the daily report
- var message = "Daily data not received from the following: \n" + nongiven +"\nAnd the following Tickets requires attention: \n" + combination
+ var emailAddress = 'join-us@insidedesk.com'
+ var subject = "Daily Report of " + formatcurrentdate(now) //gets current date for the daily
+ var message = "Daily data not received from the following: \n" + nongiven +"\nAnd the following Tickets requires attention: "
+ for(i=0;i<combination.length;i++){ //formats the tickets left with the office number for the email
+   message = message +"\n"+ combination[i]
+ }
  MailApp.sendEmail(emailAddress,subject,message)
 
 }

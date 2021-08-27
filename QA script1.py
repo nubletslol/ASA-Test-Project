@@ -18,11 +18,11 @@ for i in range (600):
     urltester1 = ("https://www.dentrix.com/products/eservices/eclaims/payor-search?start=0&keyword="+randomnumber)
     print(urltester1)
     pull = requests.get(urltester1)
-    soup = BeautifulSoup(requests.get(urltester1).content, "html.parser")   #pulls htmls from the page
-    for a_tag in soup.find_all('a'):
-        href = a_tag.attrs.get("href")
-        if href is not None:   
-            urls= urls+1   #counts htmls
+    soup = BeautifulSoup(requests.get(urltester1).content, "html.parser")
+    for a in soup.find_all('a'):
+        weblink = a.attrs.get("href")
+        if weblink is not None:
+            urls= urls+1
     print (urls)
    
 
@@ -35,17 +35,15 @@ for i in range (600):
     
     pull = requests.get(page_source)
     soup = BeautifulSoup(requests.get(page_source).content, "html.parser")
-    for a_tag in soup.find_all('a'):
-        href = a_tag.attrs.get("href") #pulls htmls from page
-        if href is not None:
-            urls2= urls2+1 #counts htmls
+    for a in soup.find_all('a'):
+        weblink = a.attrs.get("href")
+        if weblink is not None:
+            urls2= urls2+1
     print (urls2)
-    if urls != urls2 : #compares values, if it is off, then stop
+    if urls != urls2 :
        print("Issue found with payeeID: " + randomnumber)
        break
     
     
-
-
 
 

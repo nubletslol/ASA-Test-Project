@@ -15,29 +15,26 @@ print(pull.text)
 with open ("QA Test file.txt", 'w') as f:
     f.write(pull.text)
 
-payeeID = []
+payorID = []
 with open("QA Test file.txt") as f:
     while ( line := f.readline().rstrip()):
         if ('/products/eservices/eclaims/payor-search?start=0&keyword=' in line):
-            payee = payeeID.append(re.search('*">(.*)</a></td*', line)) #parses and appends payeeID to a list
+            payee = payorID.append(re.search('*">(.*)</a></td*', line)) #parses and appends payeeID to a list
 
 #script enters the payeeid through the search bar to see if its valid
-for i in payeeID:
-    urltester = ("https://www.dentrix.com/products/eservices/eclaims/payor-search?start=0&keyword="+payeeID[i])
+for i in payorID:
+    urltester = ("https://www.dentrix.com/products/eservices/eclaims/payor-search?start=0&keyword="+payorID[i])
     pull = requests.get(urltester)
     print(pull.text)
 
     driver.get("https://www.dentrix.com/products/eservices/eclaims/payor-search?start=0&keyword=")
     searchbar= driver.find_element_by_css_selector('keyword')
-    searchbar.send_keys(payeeID[i])
+    searchbar.send_keys(payorID[i])
     page = driver.page_source
     if pull.text != page :
-        print("Issue found with payeeID: " + payeeID[i])
+        print("Issue found with payeeID: " + payorID[i])
         break
     #tests the page with the auto entered one to see if it works and is reliable
-
-
-
 
 
 

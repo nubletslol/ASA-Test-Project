@@ -13,15 +13,15 @@ driver = webdriver.Chrome(executable_path=Driver_path)
 urltester = ("https://www.dentrix.com/products/eservices/eclaims/payor-search?start=0&keyword=")
 pull = requests.get(urltester)
 print(pull.text)
-with open ("QA Test file.txt", 'w') as f:
+with open ("C:/Users/Khoa Ng/Documents/GitHub/QATestfile.txt", 'w') as f:
     f.write(pull.text)
 
 payorName = []
-with open("QA Test file.txt") as f:
+with open("C:/Users/Khoa Ng/Documents/GitHub/QATestfile.txt") as f:
     while ( line := f.readline().rstrip()):
         if ('//products//eservices//eclaims//payor-search?start=0&keyword=' in line):
             payor = payorName.append(re.search('*<//td><td>(.*)<//td><td*>', line)) #parses and appends payor name to a list
-            print(payor)
+            
 #script enters the payor name through the search bar to see if its valid
 for i in payorName:
     urltester = ("https://www.dentrix.com/products/eservices/eclaims/payor-search?start=0&keyword="+payorName[i])
@@ -36,6 +36,12 @@ for i in payorName:
         print("Issue found with Payor Name: " + payorName[i])
         break
     #tests the page with the auto entered one to see if it works and is reliable
+
+
+
+
+
+
 
 
 

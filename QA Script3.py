@@ -33,7 +33,7 @@ for i in payeeID:
     page = driver.page_source
     if pull.text != page :
         print("Issue found with payeeID: " + payeeID[i])
-        i = 700
+        break
     #tests the page with the auto entered one to see if it works and is reliable
 
 
